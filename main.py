@@ -13,7 +13,7 @@ print("\nTRANSCRIPTION:")
 print(transcription)
 
 # Load text model
-model_name = "google/flan-t5-small"
+model_name = "google/flan-t5-base"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
@@ -27,18 +27,18 @@ def generate_text(prompt, max_tokens=120):
 
 # Everything below is generated from the audio transcription
 summary = generate_text(
-    "Summarize the following lecture clearly:\n" + transcription,
-    100
+    "Write a detailed 3-sentence academic summary of this lecture. Do not copy the text exactly:\n" + transcription,
+    150
 )
 
 key_points = generate_text(
-    "Write 3 key points from the following lecture:\n" + transcription,
-    120
+    "Extract 4 clear bullet-point key ideas from this lecture. Each bullet should be specific:\n" + transcription,
+    180
 )
 
 study_questions = generate_text(
-    "Write 3 study questions based only on the following lecture:\n" + transcription,
-    120
+    "Create 4 useful study questions from this lecture. The questions should help a student review the main concepts:\n" + transcription,
+    180
 )
 
 print("\nSUMMARY:")
